@@ -19,6 +19,7 @@ release
 ```
 
 By default, this will
+
 * execute .git/hooks/pre-release (if present)
 * increment the patch version (ex: from 1.2.0 to 1.2.1) in the package.json file using the [Semantic Versioning specification](http://semver.org/)
 * commit the package.json file
@@ -45,27 +46,16 @@ release 1.3.0-alpha
 ```
 ## Release a new version of your Git-flow project
 If both branches 'master' and 'develop' exist, then git-release presumes the 
-repo is used with the Git-flow workflow.  
+repo is used with the Git-flow workflow.  It will leave some actions to the git flow release subcommands.
+
+ * check that the current branch is a release branch.  
+ * check the intended version against the version in the package.json
+ * exit if there is no advance
+ * edit the package.json
+ * commit the file
 
 ![screenshot](gitflow.png)
 
-By default, this will
-* execute .git/hooks/pre-release (if present)
-* create a temporary release branch (local only), if it doesn't already exist.
-* increment the minor version (ex: from 1.2.0 to 1.3.0) in the package.json file using the [Semantic Versioning specification](http://semver.org/)
-* commit the package.json file
-* merge it into the master branch
-* push to the remote server
-* merge it to the develop branch
-* optionally modify the version in the package.json file to have a distinct patch number
-  and commit the package.json file
-* push to the remote server
-* delete the temporary release branch (local only)
-* create a Git tag for the new version
-* push to the remote server
-* execute .git/hooks/post-release (if present)
-
-No release branch is pushed to the remote server.
  
 If more changes than the version increment need to occur in the release branch, then 
 create the branch first and make those changes. 
